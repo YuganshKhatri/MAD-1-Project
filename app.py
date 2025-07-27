@@ -271,7 +271,7 @@ def spotdetails(lot_id,spot_id):
             vehicle=user.vehicle_number
             start=user.start_time
             cost=user.cost
-        return render_template("spotdetails.html",lot_id=lot_id,spot_id=spot_id,user_id=user_id,vehicle=vehicle,start=start,cost=cost)
+            return render_template("spotdetails.html",lot_id=lot_id,spot_id=spot_id,user_id=user_id,vehicle=vehicle,start=start,cost=cost)
     else:
         return render_template("spotdet.html",lot_id=lot_id,spot_id=spot_id)
     

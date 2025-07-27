@@ -265,13 +265,12 @@ def adminsearch():
 @app.route("/spot/<int:lot_id>/<int:spot_id>",methods=["GET","POST"])
 def spotdetails(lot_id,spot_id):
     user=db.session.query(ParkingHistory).filter((ParkingHistory.lot_id==lot_id) & (ParkingHistory.spot_id==spot_id)).order_by(ParkingHistory.id.desc()).first()
-    if user:
-        if user.status=="Booked" or user.status=="Started":
-            user_id=user.user_id
-            vehicle=user.vehicle_number
-            start=user.start_time
-            cost=user.cost
-            return render_template("spotdetails.html",lot_id=lot_id,spot_id=spot_id,user_id=user_id,vehicle=vehicle,start=start,cost=cost)
+    if user and user.status in ["Booked","Started"]:
+        user_id=user.user_id
+        vehicle=user.vehicle_number
+        start=user.start_time
+        cost=user.cost
+        return render_template("spotdetails.html",lot_id=lot_id,spot_id=spot_id,user_id=user_id,vehicle=vehicle,start=start,cost=cost)
     else:
         return render_template("spotdet.html",lot_id=lot_id,spot_id=spot_id)
     
